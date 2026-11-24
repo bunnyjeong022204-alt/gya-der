@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Gya-der ♡</title>
+  <link rel="icon" href="assets/characters/fairy-happy.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-mood="0">
+  <div id="app">
+
+    <!-- ===== 게임 화면 ===== -->
+    <main id="stage" aria-live="polite">
+      <div id="bg" class="bg bg-room-dim"></div>
+      <div id="glitter" aria-hidden="true"></div>
+      <div id="chars"></div>
+      <div id="item" class="item hidden"></div>
+      <div id="note" class="note hidden"></div>
+      <div id="fx" aria-hidden="true"></div>
+
+      <!-- 왼쪽 위: 날짜 -->
+      <div id="dateBox" class="hud sticker">
+        <span id="dateText">7월 1일</span>
+        <span id="dowText" class="dow">MON</span>
+      </div>
+
+      <!-- 오른쪽 위: 캐릭터 정보 -->
+      <div id="infoBox" class="hud">
+        <div class="pill">Name. 갸더</div>
+        <div class="pill">Age. 18</div>
+        <div class="pill money">Money. <b id="moneyText">27,590원</b></div>
+        <div id="stats" class="stats">
+          <div class="stat" data-k="fairyTrust"><span class="lbl">요정</span><span class="pips"></span></div>
+          <div class="stat" data-k="gyaderTrust"><span class="lbl">갸더</span><span class="pips"></span></div>
+          <div class="stat" data-k="fatherFear"><span class="lbl">불안</span><span class="pips"></span></div>
+        </div>
+      </div>
+
+      <div id="banner" class="banner hidden"></div>
+
+      <!-- 알림이 하나씩 쌓이는 패널 -->
+      <div id="notifs" class="notifs hidden">
+        <div class="notifs-head"><b id="notifTitle">알림</b><span id="notifCount" class="count">0</span></div>
+        <div id="notifList"></div>
+      </div>
+
+      <!-- 휴대폰 메시지 -->
+      <div id="phone" class="phone hidden">
+        <div class="phone-top"><span id="phoneTitle">채린 ♡</span><span class="dots">•••</span></div>
+        <div id="phoneBody" class="phone-body"></div>
+      </div>
+
+      <!-- 아래: 대화창 -->
+      <section id="textbox" class="textbox">
+        <div id="nameTab" class="name-tab hidden">갸더</div>
+        <p id="text"></p>
+        <span id="nextMark" class="next-mark">▼</span>
+      </section>
+
+      <div id="choices" class="choices hidden"></div>
+
+      <div id="toolbar">
+        <button id="btnLog" type="button" title="대사 기록">LOG</button>
+        <button id="btnMute" type="button" title="소리">♪</button>
+        <button id="btnMenu" type="button" title="타이틀로">MENU</button>
+      </div>
+
+      <div id="black" class="black"><p id="blackText"></p></div>
+      <div id="flash" class="flash"></div>
+    </main>
+
+    <!-- ===== 대사 기록 ===== -->
+    <div id="log" class="overlay hidden">
+      <div class="log-panel">
+        <div class="log-head"><b>LOG ♡</b><button id="logClose" type="button">닫기</button></div>
+        <div id="logBody" class="log-body"></div>
+      </div>
+    </div>
+
+    <!-- ===== 타이틀 ===== -->
+    <section id="title" class="screen">
+      <div class="title-deco" aria-hidden="true"></div>
+      <div class="title-inner">
+        <div class="title-art">
+          <img class="title-gyaru" src="assets/characters/gyaru-full.webp" alt="" />
+          <img class="title-dark" src="assets/characters/gyader-full.webp" alt="" />
+          <img class="title-fairy" src="assets/characters/fairy-gyaru.webp" alt="" />
+        </div>
+        <div class="title-copy">
+          <h1 class="logo">Gya-der<span>★</span></h1>
+          <p class="tagline" id="tagline">갸더를 최고의 갸루로 만들어보자!♡</p>
+          <div class="title-buttons">
+            <button id="btnStart" class="btn-pink big" type="button">♡ START</button>
+            <button id="btnContinue" class="btn-pink" type="button">♡ CONTINUE</button>
+          </div>
+          <div id="endingList" class="ending-list"></div>
+          <button id="btnReset" class="link-btn" type="button">기록 초기화</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 엔딩 ===== -->
+    <section id="ending" class="screen hidden">
+      <div class="ending-inner">
+        <p class="ending-code" id="endCode">END A</p>
+        <h2 class="ending-title" id="endTitle">LITERAL LEGEND</h2>
+        <p class="ending-sub" id="endSub"></p>
+        <p class="ending-song hidden" id="endSong">♪ LITERAL LEGEND</p>
+        <div id="endStats" class="ending-stats"></div>
+        <button id="btnToTitle" class="btn-pink" type="button">타이틀로</button>
+        <p class="care">이 이야기는 픽션입니다. 가정폭력이나 학대로 힘들다면 혼자 견디지 마세요.<br/>긴급 112 · 청소년상담 1388 · 여성긴급전화 1366</p>
+      </div>
+    </section>
+
+    <div id="debug" class="debug hidden"></div>
+  </div>
+
+  <!-- 순서 중요: 상태 → 에셋 → 사운드 → 선택지 → 스토리 → 엔딩 → 엔진 -->
+  <script src="game/state.js"></script>
+  <script src="game/assets.js"></script>
+  <script src="game/audio.js"></script>
+  <script src="game/choices.js"></script>
+  <script src="game/story.js"></script>
+  <script src="game/haru.js"></script>
+  <script src="game/endings.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
